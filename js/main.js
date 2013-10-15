@@ -10,9 +10,15 @@ $(function () {
 	for(var i = 0; i < 1; i += 0.05) {
 		d1.push([i, Formula.NORMSDIST(i, true)]);
 	}*/
-
-	var result = brownian_path(0.1);
-	$("#plot-holder").html("L: " + result);
+	var result_x = brownian_path(0.2);
+	var result_y = brownian_path(0.2);
+	var toPlot = [];
+	for(var i = 1; i < result_x.length; i++) {
+		toPlot.push([result_x[i], result_y[i]]);
+	}
+	console.log(toPlot);
+	$("#plot-holder").html("bridge: " + result_x[1]);
+	$.plot($("#plot-holder"), [ toPlot ]);
 	
 	function nextG(F, rho) {
 		var G = F + 1;
@@ -52,21 +58,45 @@ $(function () {
 		
 		var G1=nextG(Math.pow(2, L) , 2); 
 		console.log("G1: "+G1);
-		var Gseries = new Array(32);
-		for(var index = 0; index < 32; index++){
-			Gseries[index] = 0;
-		}
+		var Gseries = new Array();
+		Gseries.push(0);
+		Gseries.push(G1);
 		console.log(Gseries);
 		var numG = 0;
 		
-		while(G1 < Number.POSITIVE_INFINITY ) {
+		while(G1 < Number.POSITIVE_INFINITY) {
 			numG = numG + 1;
-			Gseries[numG] = G1;
+			Gseries.push(G1);
 			console.log(Gseries);
 			F = G1;
 			G1 = nextG(F, 2);
 		}
-
-		return L;
+		
+		//if(numG == 0) { numG = numG + 1; }
+		var K = Math.ceil(Math.log(Math.max(Gseries[numG]+1, Math.pow(2, L)))/Math.log(2));
+		var M = Math.pow(2, K);
+		
+		var bridge = new Array(M);
+		bridge[0] = 0;
+		bridge[1] = Formula.NORMSINV(Math.random())/Math.sqrt(Math.pow(2, L));
+		console.log("bridge:" + bridge[1]);
+		
+		for(var i = 2; i <= Math.pow(2, L); i++) {
+			bridge[i*Math.pow(2, (K-L))] = bridge[(i-1)*Math.pow(2,(K-L))] + Formula.NORMSINV(Math.random())/Math.sqrt(Math.pow(2, L));
+		}
+		console.log(bridge);
+		console.log("K:" + K + "; L: " + L);
+		
+		var k1 = 1;
+		var flag = 0;
+		for(var i = L; i <= K-1; i++) {
+			for(var k = 1; k <= Math.pow(2, i) - 1; k++) {
+				if(k+Math.pow(2, i) < Gseries[k1]) {
+					flag = 1;
+				}
+			}
+		}
+		console.log("flag: " + flag);
+		return bridge;
 	}
 });
