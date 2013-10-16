@@ -1,5 +1,4 @@
 $(function () { 
-	//alert("JavaScript is ready!");
 	$("#testingarea").html("jQuery is ready");
 	
 /*
@@ -10,9 +9,10 @@ $(function () {
 	for(var i = 0; i < 1; i += 0.05) {
 		d1.push([i, Formula.NORMSDIST(i, true)]);
 	}*/
-	var result_x = brownian_path(0.2);
+	var result_x = brownian_path(0.2); //TODO: user precision
 	var result_y = brownian_path(0.2);
 	var toPlot = [];
+	//TODO: error check lengths
 	for(var i = 1; i < result_x.length; i++) {
 		toPlot.push([result_x[i], result_y[i]]);
 	}
@@ -89,10 +89,36 @@ $(function () {
 		
 		var k1 = 1;
 		var flag = 0;
+		var U = 0;
+		var a = 0;
 		for(var i = L; i <= K-1; i++) {
 			for(var k = 1; k <= Math.pow(2, i) - 1; k++) {
 				if(k+Math.pow(2, i) < Gseries[k1]) {
 					flag = 1;
+					while(flag) {
+						U = Formula.NORMSINV(Math.random());
+						if(Math.abs(U) < 2*Math.log((Math.log(Math.pow(2, i)+k)), 0.5)) {
+							flag = 0;
+						}
+					}
+					bridge[Math.pow(2, (K-i-1))*(2*k+1)]=(bridge[Math.pow(2, (K-i))*k]+bridge[Math.pow(2, (K-i))*(k+1)])/2 + Math.pow(2, (-(i+1)/2))*U;
+				}
+				else {
+					k1 = k1+1;
+					a = 2 * Math.pow(Math.log(k+Math.pow(2, i)), 0.5);
+					flag = 1;
+					while(flag) {
+						U = ((-1) * Math.log(Math.random())) + a;
+						if(Math.random() <= Math.exp((-1)*U*U/2 + U - a + a*a/2)) {
+							flag = 0;
+						}
+					}
+					if(Math.random() < 0.5) {
+						bridge[Math.pow(2, (L-1-i))*(2*k+1)]=(bridge[Math.pow(2, (L-i))*k]+bridge[Math.pow(2, (L-i))*(k+1)])/2 + 2^(-(16+i+1)/2)*U;
+					}
+					else {
+						bridge[Math.pow(2, (L-1-i))*(2*k+1)]=(bridge[Math.pow(2, (L-i))*k]+bridge[Math.pow(2, (L-i))*(k+1)])/2 - 2^(-(16+i+1)/2)*U;
+					}
 				}
 			}
 		}
