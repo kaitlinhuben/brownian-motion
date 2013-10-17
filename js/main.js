@@ -12,8 +12,21 @@ $(function () {
 
 	/* Run simulation when Refresh button is clicked */
 	$("#refresh").click(function() {
-		var user_precision = $("#precision").val();
-		runSimulation(user_precision);
+		var user_precision = $("#precision").val();	//TODO: error check on precision
+		
+		// if user-precision input was left blank, set to default 0.2
+		if(user_precision == '') {
+			user_precision = 0.2;
+			runSimulation(user_precision);
+		}
+		else {
+			if(user_precision <= 0) {
+				alert("Precision cannot be zero/negative. Please enter a different precision.");
+			} else {
+				runSimulation(user_precision);
+			}
+		}
+		
 	});
 	
 	/* Run simulation with precision e and update plot to show results */

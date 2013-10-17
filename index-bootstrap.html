@@ -48,12 +48,18 @@
     <div class="container">
 	  <div class="row">
 	  
-		<div class="col-md-3" id="controls">
-			<h1>Modeling Brownian Motion</h1>
-			<p>This JavaScript application models Brownian motion with pseudorandom numbers.<br />
-				Click Refresh to generate a new graph.<br /></p>
-			Precision: <input type="text" id="precision" />
-			<button type="button" id="refresh">Refresh</button>
+		<div class="col-md-3" id="info">
+			<h2>Modeling Brownian Motion</h2>
+			
+			<p>This JavaScript application models Brownian motion with pseudorandom numbers.<p>
+			
+			<p>Click Refresh to generate a new graph with the given precision.</p>
+			<br />
+			
+			<div id="controls">
+				Precision: <input type="text" id="precision" placeholder="0.2"/>
+				<button type="button" id="refresh">Refresh</button>
+			</div>
 		</div><!-- /.col -->
 		
 		<div class="col-md-9" id="content">
@@ -68,7 +74,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
