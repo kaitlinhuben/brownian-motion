@@ -18,16 +18,28 @@ $(function () {
 	
 	/* Run simulation with precision e and update plot to show results */
 	function runSimulation(e) {
+		// simulate Brownian path twice, once to get coordinates for
+		// the x direction and once for the y direction
 		var result_x = brownian_path(e); 
 		var result_y = brownian_path(e);
+		
+		// create new array to store pairs of points to be graphed
 		var toPlot = [];
-		//TODO: error check lengths
-		for(var i = 1; i < result_x.length; i++) {
-			toPlot.push([result_x[i], result_y[i]]);
+		
+		// if different number of points in x and y, something went wrong
+		if(result_x.length != result_y.length) {
+			$("#plot-holder").html("Oops, something went wrong in our calculations!");
+		} 
+		// otherwise, can go ahead and plot
+		else {
+			for(var i = 1; i < result_x.length; i++) {
+				toPlot.push([result_x[i], result_y[i]]);
+			}
+			console.log(toPlot);
+			
+			// plot the pairs of points (using flot.js)
+			$.plot($("#plot-holder"), [ toPlot ]);
 		}
-		console.log(toPlot);
-		//$("#plot-holder").html("bridge: " + result_x[1]);
-		$.plot($("#plot-holder"), [ toPlot ]);
 	}
 	
 	/* Simulate a Brownian path on the time interval [0,1] with given precision e */
