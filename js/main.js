@@ -1,17 +1,25 @@
-/* TODO: comment */
+//=============================================================================
+// Brownian motion simulator
+// Algorithms - Jose Blanchet
+// Implementation - Kaitlin Huben
+// (c) Kaitlin Huben 2013
+//=============================================================================
 $(function () { 
 
-	/* Run simulation on load */
-	runSimulation();
+	/* Run simulation on load with default precision of 0.2 */
+	var precision = 0.2;
+	runSimulation(precision);
 
 	/* Run simulation when Refresh button is clicked */
 	$("#refresh").click(function() {
-		runSimulation();
+		var user_precision = $("#precision").val();
+		runSimulation(user_precision);
 	});
 	
-	function runSimulation() {
-		var result_x = brownian_path(0.2); //TODO: user precision
-		var result_y = brownian_path(0.2);
+	/* Run simulation with precision e and update plot to show results */
+	function runSimulation(e) {
+		var result_x = brownian_path(e); 
+		var result_y = brownian_path(e);
 		var toPlot = [];
 		//TODO: error check lengths
 		for(var i = 1; i < result_x.length; i++) {
