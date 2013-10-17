@@ -1,4 +1,8 @@
+* {
+	font-family: Helvetica, Arial, sans-serif;
+}
 #plot-holder {
-	width: 300px;
-	height: 300px;
+/*	width: 300px;
+	height: 300px; */
+	/*TODO: fix*/
 }

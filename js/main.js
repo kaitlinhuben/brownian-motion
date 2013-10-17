@@ -1,51 +1,25 @@
+/* TODO: comment */
 $(function () { 
-	$("#testingarea").html("jQuery is ready");
+
+	/* Run simulation on load */
+	runSimulation();
+
+	/* Run simulation when Refresh button is clicked */
+	$("#refresh").click(function() {
+		runSimulation();
+	});
 	
-/*
-	var result = Formula.NORMSDIST(1, true);
-	$("#testingarea").append("<br />" + result);
-	
-	var d1 = [];
-	for(var i = 0; i < 1; i += 0.05) {
-		d1.push([i, Formula.NORMSDIST(i, true)]);
-	}*/
-	var result_x = brownian_path(0.2); //TODO: user precision
-	var result_y = brownian_path(0.2);
-	var toPlot = [];
-	//TODO: error check lengths
-	for(var i = 1; i < result_x.length; i++) {
-		toPlot.push([result_x[i], result_y[i]]);
-	}
-	console.log(toPlot);
-	$("#plot-holder").html("bridge: " + result_x[1]);
-	$.plot($("#plot-holder"), [ toPlot ]);
-	
-	function nextG(F, rho) {
-		var G = F + 1;
-		console.log("G: " + G);
-		var MAX = Math.pow(2, 50);
-		var U = 1 - 2*(1 - Formula.NORMSDIST((rho*(Math.pow(Math.log(G), 0.5))), true));  //TODO: check log or ln?
-		console.log("U: " + U);
-		var D = (1-1/rho/(Math.pow(Math.log(G), 0.5))/(rho*rho/2-1)*Math.pow(G, 1-rho*rho/2))*U;
-		console.log("D: " + D);
-		var V = Math.random();
-		console.log("V: " + V);
-		
-		for(G = F + 1; G <= MAX; G++) {
-			if(U < V) {
-				return G;
-			}
-			
-			if(V < D){
-				G = Number.POSITIVE_INFINITY;
-				return G;
-			}
-			U = U * (1 - 2*(1 - Formula.NORMSDIST((rho*(Math.pow(Math.log(G), 0.5)))), true));
-			D = (1-1/rho/(Math.pow(Math.log(G), 0.5))/(rho*rho/2-1)*Math.pow(G, 1-rho*rho/2))*U;
-			
-			console.log("G: " + G + ";  U: " + U + ";  D: " + D);
+	function runSimulation() {
+		var result_x = brownian_path(0.2); //TODO: user precision
+		var result_y = brownian_path(0.2);
+		var toPlot = [];
+		//TODO: error check lengths
+		for(var i = 1; i < result_x.length; i++) {
+			toPlot.push([result_x[i], result_y[i]]);
 		}
-		alert("Exceeds MAX");
+		console.log(toPlot);
+		//$("#plot-holder").html("bridge: " + result_x[1]);
+		$.plot($("#plot-holder"), [ toPlot ]);
 	}
 	
 	/* Simulate a Brownian path on the time interval [0,1] with given precision e */
@@ -125,4 +99,33 @@ $(function () {
 		console.log("flag: " + flag);
 		return bridge;
 	}
+
+	function nextG(F, rho) {
+		var G = F + 1;
+		console.log("G: " + G);
+		var MAX = Math.pow(2, 50);
+		var U = 1 - 2*(1 - Formula.NORMSDIST((rho*(Math.pow(Math.log(G), 0.5))), true)); 
+		console.log("U: " + U);
+		var D = (1-1/rho/(Math.pow(Math.log(G), 0.5))/(rho*rho/2-1)*Math.pow(G, 1-rho*rho/2))*U;
+		console.log("D: " + D);
+		var V = Math.random();
+		console.log("V: " + V);
+		
+		for(G = F + 1; G <= MAX; G++) {
+			if(U < V) {
+				return G;
+			}
+			
+			if(V < D){
+				G = Number.POSITIVE_INFINITY;
+				return G;
+			}
+			U = U * (1 - 2*(1 - Formula.NORMSDIST((rho*(Math.pow(Math.log(G), 0.5)))), true));
+			D = (1-1/rho/(Math.pow(Math.log(G), 0.5))/(rho*rho/2-1)*Math.pow(G, 1-rho*rho/2))*U;
+			
+			console.log("G: " + G + ";  U: " + U + ";  D: " + D);
+		}
+		alert("Exceeds MAX");
+	}
+
 });
