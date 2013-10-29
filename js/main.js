@@ -45,13 +45,38 @@ $(function () {
 		} 
 		// otherwise, can go ahead and plot
 		else {
+			// push points to array to plot
 			for(var i = 1; i < result_x.length; i++) {
 				toPlot.push([result_x[i], result_y[i]]);
 			}
 			console.log(toPlot);
 			
+			var min_value = Number.MAX_VALUE;
+			var max_value = -1 * Number.MAX_VALUE;
+			for(var i = 1; i < result_x.length; i++) {
+				if(result_x[i] < min_value) { min_value = result_x[i]; }
+				if(result_y[i] < min_value) { min_value = result_y[i]; }
+				
+				if(result_x[i] > max_value) { max_value = result_x[i]; }
+				if(result_y[i] > max_value) { max_value = result_y[i]; }
+			}
+			console.log("Min: " + min_value);
+			console.log("Max: " + max_value);
+			
+			// set options
+			var options = {
+				xaxis: {
+					min: min_value,
+					max: max_value
+				},
+				yaxis: {
+					min: min_value,
+					max: max_value
+				}
+			};
+			
 			// plot the pairs of points (using flot.js)
-			$.plot($("#plot-holder"), [ toPlot ]);
+			$.plot($("#plot-holder"), [ toPlot ], options);
 		}
 	}
 	
