@@ -80,6 +80,13 @@ $(function () {
 				yaxis: {
 					min: min_value,
 					max: max_value
+				},
+				
+				//make the line thinner
+				series: {
+					lines: {
+						lineWidth: 1
+					}
 				}
 			};
 			
