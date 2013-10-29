@@ -92,6 +92,9 @@ $(function () {
 			
 			// plot the pairs of points (using flot.js)
 			$.plot($("#plot-holder"), [ toPlot ], options);
+			
+			// update the title to show current precision
+			$("#result-subtitle").html("(Precision: " + e + ")");
 		}
 	}
 	
