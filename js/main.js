@@ -29,6 +29,13 @@ $(function () {
 		
 	});
 	
+	/* If user hits ENTER from input, simulate clicking Refresh button */
+	$("#precision").keyup(function(event){
+		if(event.keyCode == 13) {
+			$("#refresh").click();
+		}
+	});
+	
 	/* Run simulation with precision e and update plot to show results */
 	function runSimulation(e) {
 		// simulate Brownian path twice, once to get coordinates for
@@ -65,6 +72,7 @@ $(function () {
 			
 			// set options
 			var options = {
+				//make sure x and y axes have same min/max
 				xaxis: {
 					min: min_value,
 					max: max_value
