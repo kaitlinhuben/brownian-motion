@@ -6,12 +6,30 @@ body {
 	padding-top: 60px;
 }
 
-#controls {
-	
+#info-title {
+	/*color: #2A7CA0*/
+}
+
+#options-title {
+	text-decoration: underline;
+}
+
+#precision-title, #randomness-title, #dimension-title{
+	color: #2A7CA0;
+	font-weight: bold;
+}
+
+#random-options-holder, #dimension-options-holder {
+	padding-left: 10px;
 }
 
 #content {
 	text-align:center;
+}
+
+#result-title {
+	color: #2A7CA0;
+	font-weight: bold;
 }
 
 #plot-holder {

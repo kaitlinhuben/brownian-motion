@@ -5,6 +5,8 @@
 // (c) Kaitlin Huben 2013
 //=============================================================================
 $(function () { 
+	/* set up button options */
+	$("#dimension-options-holder").buttonset();
 
 	/* Run simulation on load with default precision of 0.2 */
 	var precision = 0.2;
