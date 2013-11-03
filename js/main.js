@@ -7,10 +7,13 @@
 $(function () { 
 	/* set up button options */
 	$("#dimension-options-holder").buttonset();
+	
+	/* empty out javascript error message */
+	$("#plot-holder").html(" ");
 
 	/* Run simulation on load with default precision of 0.2 */
 	var precision = 0.2;
-	runSimulation(precision);
+	runSimulationWithLoading(precision);
 
 	/* Run simulation when Refresh button is clicked */
 	$("#refresh").click(function() {
@@ -19,13 +22,13 @@ $(function () {
 		// if user-precision input was left blank, set to default 0.2
 		if(user_precision == '') {
 			user_precision = 0.2;
-			runSimulation(user_precision);
+			runSimulationWithLoading(user_precision);
 		}
 		else {
 			if(user_precision <= 0) {
 				alert("Precision cannot be zero/negative. Please enter a different precision.");
 			} else {
-				runSimulation(user_precision);
+				runSimulationWithLoading(user_precision);
 			}
 		}
 		
@@ -37,6 +40,23 @@ $(function () {
 			$("#refresh").click();
 		}
 	});
+	
+	// show loading gif
+	function showLoading() {
+		$("#loading").css("display", "block");
+	}
+	
+	// hide loading gif
+	function hideLoading() {
+		$("#loading").css("display", "none");
+	}
+	
+	// run simulation with loading gif for user
+	function runSimulationWithLoading(e) {
+		showLoading();
+		//$("#result-subtitle").html(" ");
+		window.setTimeout(function() {	runSimulation(e); }, 1000);
+	}
 	
 	/* Run simulation with precision e and update plot to show results */
 	function runSimulation(e) {
@@ -97,6 +117,8 @@ $(function () {
 			
 			// update the title to show current precision
 			$("#result-subtitle").html("(Precision: " + e + ")");
+			
+			window.setTimeout(hideLoading, 500);
 		}
 	}
 	

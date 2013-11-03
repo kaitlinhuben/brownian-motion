@@ -37,3 +37,8 @@ body {
 	width: 600px;
 	margin: 0 auto;
 }
+
+#loading {
+	z-index: 1000; 
+	margin-top: -400px
+}
