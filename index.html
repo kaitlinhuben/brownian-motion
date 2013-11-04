@@ -60,17 +60,12 @@
 				<h2 id="options-title">Options</h2>
 				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> <br><br>
 				
-				<span id="randomness-title">Randomness:</span><br>
+				<span id="randomness-title">Randomness:</span> <a title="What's this?" id="randomness-tooltip">
+						<span class="glyphicon glyphicon-question-sign"></span></a><br>
 				<div id="random-options-holder">
-					<input type="radio" name="randomness" class="random-options" checked="checked">
-						Pseudorandom &nbsp;&nbsp;<a title="Use JavaScript's native pseudorandom number generator" id="pseudo-tooltip">
-						<span class="glyphicon glyphicon-question-sign"></span></a><br>
-					<input type="radio" name="randomness" class="random-options">
-						Pre-generated random &nbsp;&nbsp;<a title="Use a pre-generated set of random numbers" id="prerand-tooltip">
-						<span class="glyphicon glyphicon-question-sign"></span></a><br>
-					<!--<input type="radio" name="randomness" class="random-options">
-						True random &nbsp;&nbsp;<a title="Use live-generated random numbers" id="liverand-tooltip">
-						<span class="glyphicon glyphicon-question-sign"></span></a><br>-->
+					<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">Pseudorandom<br>
+					<input type="radio" name="randomness" id="prerand-option" class="random-options">Pre-generated<br>
+					<!--<input type="radio" name="randomness" id="liverand-option" class="random-options">Live<br>-->
 				</div>
 				<br>
 				<span id="dimension-title" style="display:none">Dimensions:</span><!--<br>-->
@@ -83,23 +78,20 @@
 				<!--<br>-->
 				<button type="button" id="refresh">Refresh</button>
 			</div>
-			<!-- the tooltip messages that pop up when the ? iconos are clicked -->
-			<div id="pseudo-message" title="Pseudorandom">
-				<p>Use JavaScript's native pseudorandom number generator in calculations.</p>
+			
+			<!-- the tooltip message that pops up when the ? icon is clicked -->
+			<div id="random-dialog-message" title="Randomness Options">
+				<p>There are a few different options for which random numbers to use in calculations.<p>
+				<p><b>Pseudorandom:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
+				<p><b>Pre-generated:</b> Use a pre-generated set of random numbers in calculations. 
+					(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
+				<p><b>Live:</b> Connect with a random number generator to get live random numbers. <em>NOTE:</em> Not yet implemented.</p>
 			</div>
-			<div id="prerand-message" title="Pre-generated Random">
-				<p>Use a pre-generated set of random numbers in calculations.</p>
-				<p>Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.</p>
-			</div>
-			<div id="liverand-message" title="Live-generated Random">
-				<p>Connect with a random number generator to get live random numbers. *NOTE*: This option will take a while.</p>
-			</div>
-			<!-- end tooltip messages -->
 		</div><!-- /.col -->
 		
 		<div class="col-md-9" id="content">
 			<h3 id="result-title">Result</h3>
-			<h5 id="result-subtitle"></h5>
+			<!--<h5 id="result-subtitle"></h5>-->
 			<div id="plot-holder" style="display:block">
 				<!-- this text goes away if javascript is enabled -->
 				Hmm, it seems that you don't have JavaScript enabled.<br>

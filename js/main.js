@@ -5,17 +5,17 @@
 // (c) Kaitlin Huben 2013
 //=============================================================================
 $(function () { 
-	/* set up button options */
-	$("#dimension-options-holder").buttonset();
-	
 	/* empty out javascript error message */
 	$("#plot-holder").html(" ");
 	
 	/* set up refresh button */
 	$("#refresh").button();
 	
-	/* set up tooltip messages as dialogs */
-	$( "#pseudo-message" ).dialog({
+	/* set up dimension button options */
+	$("#dimension-options-holder").buttonset();
+	
+	/* set up tooltip message as dialog */
+	$( "#random-dialog-message" ).dialog({
       modal: true,
       buttons: {
         Ok: function() {
@@ -24,33 +24,10 @@ $(function () {
       },
 	  autoOpen: false
     });
-	$( "#prerand-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
-	$( "#liverand-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
-	/* have dialogs open when clicked */
-	$("#pseudo-tooltip").click(function(){
-		$("#pseudo-message").dialog("open");
-	});
-	$("#prerand-tooltip").click(function(){
-		$("#prerand-message").dialog("open");
-	});
-	$("#liverand-tooltip").click(function(){
-		$("#liverand-message").dialog("open");
+
+	/* have dialog open when clicked */
+	$("#randomness-tooltip").click(function(){
+		$("#random-dialog-message").dialog("open");
 	});
 
 	/* Run simulation on load with default precision of 0.2 */
@@ -157,8 +134,15 @@ $(function () {
 			// plot the pairs of points (using flot.js)
 			$.plot($("#plot-holder"), [ toPlot ], options);
 			
-			// update the title to show current precision
-			$("#result-subtitle").html("(Precision: " + e + ")");
+			// update the title to show current precision and other options
+			var title = "Precision: " + e + " (";
+			if($("#pseudo-option").prop("checked")) {
+				title += "pseudorandom";
+			} else if($("#prerand-option").prop("checked")) {
+				title += "pre-generated random";
+			} //TODO: add liverand
+			title += ")";
+			$("#result-title").html(title);
 			
 			window.setTimeout(hideLoading, 500);
 		}

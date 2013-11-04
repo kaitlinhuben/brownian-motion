@@ -24,11 +24,11 @@ body {
 	padding-left: 10px;
 }
 
-#pseudo-tooltip, #prerand-tooltip, #liverand-tooltip {
+#randomness-tooltip {
 	/*color: #aed0ea;*/
 }
 
-#pseudo-tooltip:hover, #prerand-tooltip:hover, #liverand-tooltip:hover {
+#randomness-tooltip:hover {
 	cursor: pointer;
 	text-decoration: none;
 }
@@ -39,7 +39,7 @@ body {
 
 #result-title {
 	/*color: #2A7CA0;*/
-	color: #2779aa;
+	/*color: #2779aa;*/
 	font-weight: bold;
 }
 
