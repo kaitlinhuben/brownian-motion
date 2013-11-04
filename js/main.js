@@ -22,7 +22,7 @@ $(function () {
 	$("#plot-holder").html(" ");
 	
 	/* set up refresh button */
-	$("#refresh").button();
+	//$("#refresh").button();
 	
 	/* set up randomness button options */
 	$("#random-options-holder").buttonset();
