@@ -4,6 +4,11 @@
 // Implementation - Kaitlin Huben
 // (c) Kaitlin Huben 2013
 //=============================================================================
+var haveRandomNumbers = false;
+var randomNumbers = ["this shouldn't be here", "neither should this"];
+var randIndex = 0;
+var numbersToRequest = 10000;
+var useRandomNumbers = true;
 $(function () {
 	//-------------------------------------------------------------------------
 	// set up everything visually
@@ -71,21 +76,27 @@ $(function () {
 	
 	/* run simulation with loading feedback for user */
 	function runSimulationWithLoading(e) {
+		var timeout = 50;
 		//show loading gif
 		$("#loading").css("display", "block");
 		
+		//check to see whether using live random or pseudorandom
+		if($("#liverand-option").prop("checked")) {
+			if(!haveRandomNumbers) {
+				timeout = 2000;
+				sendRequest();
+			}
+			useRandomNumbers = true;
+		} else {
+			useRandomNumbers = false;
+		}
+
 		//run simulation - slight time delay to let loading gif show up
-		window.setTimeout(function() {	runSimulation(e); }, 50);
+		//or possibly also to get more random numbers
+		window.setTimeout(function() {	runSimulation(e); }, timeout);
 		
 		//hide loading gif - done in function
 		//window.setTimeout(function() { $("#loading").css("display", "none"); }, 500);
 	}
-	
-	//-------------------------------------------------------------------------
-	// set up GET and HTTP stuff for connection to RANDOM.org
-	//-------------------------------------------------------------------------
-	$("#testing-get").click(function() {
-		//var data = sendRequest();
-		//alert(data);
-	});
+
 });

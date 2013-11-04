@@ -65,10 +65,10 @@
 				<div id="random-options-holder">
 					<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">
 						<label for="pseudo-option">Pseudo</label>
-					<input type="radio" name="randomness" id="prerand-option" class="random-options">
-						<label for="prerand-option">Pre</label>
-					<!--<input type="radio" name="randomness" id="liverand-option" class="random-options">
-						<label for="liverand-option">Live</label>-->
+					<!--<input type="radio" name="randomness" id="prerand-option" class="random-options">
+						<label for="prerand-option">Pre</label>-->
+					<input type="radio" name="randomness" id="liverand-option" class="random-options">
+						<label for="liverand-option">Live</label>
 				</div>
 				<br>
 				<span id="dimension-title" style="display:none">Dimensions:</span><!--<br>-->
@@ -81,7 +81,6 @@
 				<!--<br>-->
 				<button type="button" id="refresh">Refresh</button>
 			</div>
-			<button type="button" id="testing-get">Test GET</button>
 			
 			<!-- the tooltip message that pops up when the ? icon is clicked -->
 			<div id="random-dialog-message" title="Randomness Options">
@@ -89,7 +88,8 @@
 				<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
 				<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
 					(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
-				<p><b>Live:</b> Connect with a random number generator to get live random numbers. <em>NOTE:</em> Not yet implemented.</p>
+				<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
+				to get live random numbers. <em>NOTE:</em> Could take a little while, depending on internet speed.</p>
 			</div>
 		</div><!-- /.col -->
 		

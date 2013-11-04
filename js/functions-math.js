@@ -68,7 +68,9 @@ function runSimulation(e) {
 			title += "pseudorandom";
 		} else if($("#prerand-option").prop("checked")) {
 			title += "pre-generated random";
-		} //TODO: add liverand
+		} else if($("#liverand-option").prop("checked")) {
+			title += "live-generated random";
+		}
 		title += ")";
 		$("#result-title").html(title);
 		
@@ -107,11 +109,11 @@ function brownian_path(e) {
 	
 	var bridge = new Array(M);
 	bridge[0] = 0;
-	bridge[1] = Formula.NORMSINV(Math.random())/Math.sqrt(Math.pow(2, L));
+	bridge[1] = Formula.NORMSINV(nextRand())/Math.sqrt(Math.pow(2, L));
 	console.log("bridge:" + bridge[1]);
 	
 	for(var i = 2; i <= Math.pow(2, L); i++) {
-		bridge[i*Math.pow(2, (K-L))] = bridge[(i-1)*Math.pow(2,(K-L))] + Formula.NORMSINV(Math.random())/Math.sqrt(Math.pow(2, L));
+		bridge[i*Math.pow(2, (K-L))] = bridge[(i-1)*Math.pow(2,(K-L))] + Formula.NORMSINV(nextRand())/Math.sqrt(Math.pow(2, L));
 	}
 	console.log(bridge);
 	console.log("K:" + K + "; L: " + L);
@@ -125,7 +127,7 @@ function brownian_path(e) {
 			if(k+Math.pow(2, i) < Gseries[k1]) {
 				flag = 1;
 				while(flag) {
-					U = Formula.NORMSINV(Math.random());
+					U = Formula.NORMSINV(nextRand());
 					if(Math.abs(U) < 2*Math.log((Math.log(Math.pow(2, i)+k)), 0.5)) {
 						flag = 0;
 					}
@@ -137,12 +139,12 @@ function brownian_path(e) {
 				a = 2 * Math.pow(Math.log(k+Math.pow(2, i)), 0.5);
 				flag = 1;
 				while(flag) {
-					U = ((-1) * Math.log(Math.random())) + a;
-					if(Math.random() <= Math.exp((-1)*U*U/2 + U - a + a*a/2)) {
+					U = ((-1) * Math.log(nextRand())) + a;
+					if(nextRand() <= Math.exp((-1)*U*U/2 + U - a + a*a/2)) {
 						flag = 0;
 					}
 				}
-				if(Math.random() < 0.5) {
+				if(nextRand() < 0.5) {
 					bridge[Math.pow(2, (L-1-i))*(2*k+1)]=(bridge[Math.pow(2, (L-i))*k]+bridge[Math.pow(2, (L-i))*(k+1)])/2 + 2^(-(16+i+1)/2)*U;
 				}
 				else {
@@ -163,7 +165,7 @@ function nextG(F, rho) {
 	console.log("U: " + U);
 	var D = (1-1/rho/(Math.pow(Math.log(G), 0.5))/(rho*rho/2-1)*Math.pow(G, 1-rho*rho/2))*U;
 	console.log("D: " + D);
-	var V = Math.random();
+	var V = nextRand();
 	console.log("V: " + V);
 	
 	for(G = F + 1; G <= MAX; G++) {
@@ -181,4 +183,31 @@ function nextG(F, rho) {
 		console.log("G: " + G + ";  U: " + U + ";  D: " + D);
 	}
 	alert("Exceeds MAX");
+}
+
+/* gets the next random number, depending on whether using pseudorandom or true random
+ * if true random, uses randomNumbers array
+ * if pseudorandom, just returns Math.random()
+ */
+function nextRand() {
+	//check to see if supposed to use random numbers and if have them
+	if(useRandomNumbers && haveRandomNumbers) {
+		//if haven't used up random array yet, just return next number
+		if(randIndex < numbersToRequest) {
+			//increment randIndex for next time, return randIndex-1
+			randIndex++;
+			return randomNumbers[randIndex - 1];
+		} 
+		//otherwise need to send another GET request for more numbers
+		//but that doesn't return in time, so start returning
+		//pseudorandom choices of randomNumbers
+		else {
+			var index = Math.floor(Math.random() * 10000);
+			return randomNumbers[index];
+		}
+	}
+	//no, so return pseudorandom number
+	else {
+		return Math.random();
+	}
 }
