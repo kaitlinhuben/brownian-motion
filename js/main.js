@@ -10,6 +10,48 @@ $(function () {
 	
 	/* empty out javascript error message */
 	$("#plot-holder").html(" ");
+	
+	/* set up refresh button */
+	$("#refresh").button();
+	
+	/* set up tooltip messages as dialogs */
+	$( "#pseudo-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+	  autoOpen: false
+    });
+	$( "#prerand-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+	  autoOpen: false
+    });
+	$( "#liverand-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+	  autoOpen: false
+    });
+	/* have dialogs open when clicked */
+	$("#pseudo-tooltip").click(function(){
+		$("#pseudo-message").dialog("open");
+	});
+	$("#prerand-tooltip").click(function(){
+		$("#prerand-message").dialog("open");
+	});
+	$("#liverand-tooltip").click(function(){
+		$("#liverand-message").dialog("open");
+	});
 
 	/* Run simulation on load with default precision of 0.2 */
 	var precision = 0.2;
@@ -55,7 +97,7 @@ $(function () {
 	function runSimulationWithLoading(e) {
 		showLoading();
 		//$("#result-subtitle").html(" ");
-		window.setTimeout(function() {	runSimulation(e); }, 1000);
+		window.setTimeout(function() {	runSimulation(e); }, 250);
 	}
 	
 	/* Run simulation with precision e and update plot to show results */
@@ -227,5 +269,5 @@ $(function () {
 		}
 		alert("Exceeds MAX");
 	}
-
+	
 });

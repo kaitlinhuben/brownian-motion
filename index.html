@@ -58,35 +58,56 @@
 			
 			<div id="controls">
 				<h2 id="options-title">Options</h2>
-				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> <br>
+				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> <br><br>
 				
 				<span id="randomness-title">Randomness:</span><br>
 				<div id="random-options-holder">
-					<input type="radio" name="randomness" class="random-options" checked>Pseudorandom<br>
-					<input type="radio" name="randomness" class="random-options">Pre-generated random<br>
-					<input type="radio" name="randomness" class="random-options">True random<br>
+					<input type="radio" name="randomness" class="random-options" checked="checked">
+						Pseudorandom &nbsp;&nbsp;<a title="Use JavaScript's native pseudorandom number generator" id="pseudo-tooltip">
+						<span class="glyphicon glyphicon-question-sign"></span></a><br>
+					<input type="radio" name="randomness" class="random-options">
+						Pre-generated random &nbsp;&nbsp;<a title="Use a pre-generated set of random numbers" id="prerand-tooltip">
+						<span class="glyphicon glyphicon-question-sign"></span></a><br>
+					<input type="radio" name="randomness" class="random-options">
+						True random &nbsp;&nbsp;<a title="Use live-generated random numbers" id="liverand-tooltip">
+						<span class="glyphicon glyphicon-question-sign"></span></a><br>
 				</div>
-				
-				<span id="dimension-title">Dimensionality:</span><br>
-				<div id="dimension-options-holder">
-					<input type="radio" name="dimensionality" class="random-options" id="2D-option" checked>
+				<br>
+				<span id="dimension-title" style="display:none">Dimensions:</span><!--<br>-->
+				<div id="dimension-options-holder" style="display:none">
+					<input type="radio" name="dimensionality" class="random-options" id="2D-option" checked="checked">
 						<label for="2D-option">2D</label>
 					<input type="radio" name="dimensionality" class="random-options" id="3D-option">
 						<label for="3D-option">3D</label>
 				</div>
-				<br>
+				<!--<br>-->
 				<button type="button" id="refresh">Refresh</button>
 			</div>
+			<!-- the tooltip messages that pop up when the ? iconos are clicked -->
+			<div id="pseudo-message" title="Pseudorandom">
+				<p>Use JavaScript's native pseudorandom number generator in calculations.</p>
+			</div>
+			<div id="prerand-message" title="Pre-generated Random">
+				<p>Use a pre-generated set of random numbers in calculations.</p>
+				<p>Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.</p>
+			</div>
+			<div id="liverand-message" title="Live-generated Random">
+				<p>Connect with a random number generator to get live random numbers. *NOTE*: This option will take a while.</p>
+			</div>
+			<!-- end tooltip messages -->
 		</div><!-- /.col -->
 		
 		<div class="col-md-9" id="content">
 			<h3 id="result-title">Result</h3>
 			<h5 id="result-subtitle"></h5>
 			<div id="plot-holder" style="display:block">
+				<!-- this text goes away if javascript is enabled -->
 				Hmm, it seems that you don't have JavaScript enabled.<br>
 				Please enable JavaScript in your browser so our application can run.<br>
 				<a href="http://www.enable-javascript.com/">Here</a> is a page that tells you what JavaScript is and how to enable it.
 			</div>
+			
+			<!-- this pops up if loading -->
 			<div id="loading" style="display: none;">
 				<img src="images/spinning.gif" />
 			</div>
@@ -101,6 +122,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<!--<script type="text/javascript" src="js/jquery-ui-1.8.9.min.js"></script>-->
 	<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
@@ -110,7 +132,6 @@
 	<script type="text/javascript" src="js/numeric.min.js"></script>
 	<script type="text/javascript" src="js/nv.d3.js"></script>
 	<script type="text/javascript" src="js/underscore.string.min.js"></script>
-	<script type="text/javascript" src="js/jquery-ui-1.8.9.min.js"></script>
 	<script type="text/javascript" src="js/jquery.flot.min.js"></script>
 	<script type="text/javascript" src="js/jstat.min.js"></script>
 	<script type="text/javascript" src="js/formula.js"></script>

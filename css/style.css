@@ -15,7 +15,8 @@ body {
 }
 
 #precision-title, #randomness-title, #dimension-title{
-	color: #2A7CA0;
+	/*color: #2A7CA0;*/
+	color: #2779aa;
 	font-weight: bold;
 }
 
@@ -23,12 +24,22 @@ body {
 	padding-left: 10px;
 }
 
+#pseudo-tooltip, #prerand-tooltip, #liverand-tooltip {
+	/*color: #aed0ea;*/
+}
+
+#pseudo-tooltip:hover, #prerand-tooltip:hover, #liverand-tooltip:hover {
+	cursor: pointer;
+	text-decoration: none;
+}
+
 #content {
 	text-align:center;
 }
 
 #result-title {
-	color: #2A7CA0;
+	/*color: #2A7CA0;*/
+	color: #2779aa;
 	font-weight: bold;
 }
 
