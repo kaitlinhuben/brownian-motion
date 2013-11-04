@@ -11,6 +11,9 @@ $(function () {
 	/* set up refresh button */
 	$("#refresh").button();
 	
+	/* set up randomness button options */
+	$("#random-options-holder").buttonset();
+	
 	/* set up dimension button options */
 	$("#dimension-options-holder").buttonset();
 	

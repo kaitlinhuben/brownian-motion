@@ -60,12 +60,15 @@
 				<h2 id="options-title">Options</h2>
 				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> <br><br>
 				
-				<span id="randomness-title">Randomness:</span> <a title="What's this?" id="randomness-tooltip">
+				<span id="randomness-title">Randomness:</span>&nbsp;&nbsp;<a title="What's this?" id="randomness-tooltip">
 						<span class="glyphicon glyphicon-question-sign"></span></a><br>
 				<div id="random-options-holder">
-					<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">Pseudorandom<br>
-					<input type="radio" name="randomness" id="prerand-option" class="random-options">Pre-generated<br>
-					<!--<input type="radio" name="randomness" id="liverand-option" class="random-options">Live<br>-->
+					<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">
+						<label for="pseudo-option">Pseudo</label>
+					<input type="radio" name="randomness" id="prerand-option" class="random-options">
+						<label for="prerand-option">Pre</label>
+					<!--<input type="radio" name="randomness" id="liverand-option" class="random-options">
+						<label for="liverand-option">Live</label>-->
 				</div>
 				<br>
 				<span id="dimension-title" style="display:none">Dimensions:</span><!--<br>-->
@@ -82,8 +85,8 @@
 			<!-- the tooltip message that pops up when the ? icon is clicked -->
 			<div id="random-dialog-message" title="Randomness Options">
 				<p>There are a few different options for which random numbers to use in calculations.<p>
-				<p><b>Pseudorandom:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
-				<p><b>Pre-generated:</b> Use a pre-generated set of random numbers in calculations. 
+				<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
+				<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
 					(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
 				<p><b>Live:</b> Connect with a random number generator to get live random numbers. <em>NOTE:</em> Not yet implemented.</p>
 			</div>

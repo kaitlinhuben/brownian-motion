@@ -20,9 +20,9 @@ body {
 	font-weight: bold;
 }
 
-#random-options-holder, #dimension-options-holder {
+/*#random-options-holder, #dimension-options-holder {
 	padding-left: 10px;
-}
+}*/
 
 #randomness-tooltip {
 	/*color: #aed0ea;*/
