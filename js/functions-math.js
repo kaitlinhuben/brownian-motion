@@ -186,8 +186,10 @@ function nextG(F, rho) {
 }
 
 /* gets the next random number, depending on whether using pseudorandom or true random
+ * or pre-generated random
  * if true random, uses randomNumbers array
  * if pseudorandom, just returns Math.random()
+ * if pre-generated random, use preArray
  */
 function nextRand() {
 	//check to see if supposed to use random numbers and if have them
@@ -205,8 +207,13 @@ function nextRand() {
 			var index = Math.floor(Math.random() * 10000);
 			return randomNumbers[index];
 		}
+	} 
+	//check to see if supposed to use pre-generated random
+	else if(usePreRandNumbers) {
+		var index = Math.floor(Math.random() * 10000);
+		return preArray[index];
 	}
-	//no, so return pseudorandom number
+	//neither, so return pseudorandom number
 	else {
 		return Math.random();
 	}

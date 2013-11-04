@@ -4,11 +4,16 @@
 // Implementation - Kaitlin Huben
 // (c) Kaitlin Huben 2013
 //=============================================================================
+
+// variables for live random
 var haveRandomNumbers = false;
 var randomNumbers = ["this shouldn't be here", "neither should this"];
 var randIndex = 0;
 var numbersToRequest = 10000;
-var useRandomNumbers = true;
+var useRandomNumbers = false;
+// variable for pre-generated random
+var usePreRandNumbers = false;
+
 $(function () {
 	//-------------------------------------------------------------------------
 	// set up everything visually
@@ -80,15 +85,20 @@ $(function () {
 		//show loading gif
 		$("#loading").css("display", "block");
 		
-		//check to see whether using live random or pseudorandom
+		//check to see whether using live random, pre-generated 
+		//random, or pseudorandom
 		if($("#liverand-option").prop("checked")) {
-			if(!haveRandomNumbers) {
-				timeout = 2000;
-				sendRequest();
-			}
+			//if live random, set timeout so can send request
+			timeout = 3000;
+			sendRequest();
 			useRandomNumbers = true;
+			usePreRandNumbers = false;
+		} else if($("#prerand-option").prop("checked")) {
+			usePreRandNumbers = true;
+			useRandomNumbers = false;
 		} else {
 			useRandomNumbers = false;
+			usePreRandNumbers = false;
 		}
 
 		//run simulation - slight time delay to let loading gif show up
