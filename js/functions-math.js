@@ -56,11 +56,81 @@ function runSimulation(e) {
 				lines: {
 					lineWidth: 1
 				}
-			}
+			},
+			
+			colors: ["#2779aa"]
 		};
 		
 		// plot the pairs of points (using flot.js)
 		$.plot($("#plot-holder"), [ toPlot ], options);
+		
+		// update the title to show current precision and other options
+		var title = "Precision: " + e + " (";
+		if($("#pseudo-option").prop("checked")) {
+			title += "pseudorandom";
+		} else if($("#prerand-option").prop("checked")) {
+			title += "pre-generated random";
+		} else if($("#liverand-option").prop("checked")) {
+			title += "live-generated random";
+		}
+		title += ")";
+		$("#result-title").html(title);
+		
+		//hide loading gif once done
+		window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
+	}
+}
+
+/* Run simulation with precision e and update plot to show results */
+function run3dSimulation(e) {
+	// simulate Brownian path twice, once to get coordinates for
+	// the x direction and once for the y direction
+	var result_x = brownian_path(e); 
+	var result_y = brownian_path(e);
+	var result_z = brownian_path(e);
+	
+	// create new array to store pairs of points to be graphed
+	// also variable names
+	var toPlot = [];
+	var varArray = [];
+	
+	// if different number of points in x and y, something went wrong
+	if(result_x.length != result_y.length || result_x.length != result_z.length || result_y.length != result_z.length) {
+		$("#plot-holder").html("Oops, something went wrong in our calculations!");
+	} 
+	// otherwise, can go ahead and plot
+	else {
+		// push points to array to plot
+		for(var i = 1; i < result_x.length; i++) {
+			toPlot.push([result_x[i], result_y[i], result_z[i]]);
+			varArray.push(i);
+		}
+		console.log(toPlot);
+		
+		// graph canvas
+		var cx1 = new CanvasXpress('canvas1',
+          {
+            'y' : {
+              'vars' : varArray,
+              'smps' : ['X', 'Y', 'Z'],
+              'data' : toPlot
+            }
+          },
+          {'colors' : ['rgb(39,121,170)'],
+		  'disableMenu': true,
+		  'graphType': 'Scatter3D',
+		  'scatterType' : 'line',
+          'xAxis': ['X'],
+          'yAxis': ['Y'],
+          'zAxis': ['Z']}
+        );
+		
+		// recenter canvas
+		var canvasWidth = $("#canvas1").width();
+		var contentWidth = $("#content").width();
+		var marginLeft = (contentWidth - canvasWidth) / 2;
+		$("#container-canvas1").css("margin-left", marginLeft + "px");
+		
 		
 		// update the title to show current precision and other options
 		var title = "Precision: " + e + " (";

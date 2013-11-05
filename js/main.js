@@ -103,7 +103,17 @@ $(function () {
 
 		//run simulation - slight time delay to let loading gif show up
 		//or possibly also to get more random numbers
-		window.setTimeout(function() {	runSimulation(e); }, timeout);
+		//which simulation dependent on whether 2d or 3d
+		if($("#2D-option").prop("checked")) {
+			$("#plot-holder").css("display", "block");
+			$("#canvas1").css("display", "none");
+			window.setTimeout(function() { runSimulation(e); }, timeout);
+		} else if($("#3D-option").prop("checked")){
+			$("#canvas1").css("display", "block");
+			$("#container-canvas1").css("display", "none");
+			$("#plot-holder").css("display", "none");
+			window.setTimeout(function() { run3dSimulation(e); }, timeout);
+		}
 		
 		//hide loading gif - done in function
 		//window.setTimeout(function() { $("#loading").css("display", "none"); }, 500);
