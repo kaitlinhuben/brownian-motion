@@ -105,13 +105,38 @@ $(function () {
 		//or possibly also to get more random numbers
 		//which simulation dependent on whether 2d or 3d
 		if($("#2D-option").prop("checked")) {
+			//show 2d plot holder
 			$("#plot-holder").css("display", "block");
-			$("#canvas1").css("display", "none");
+			
+			//rename container-canvas1 (created by canvasXpress) to canvas1
+			//for next time using 3D
+			if($("#container-canvas1").length) {
+				$("#container-canvas1").attr("id", "canvas1");
+			}
+			
+			// hide 3d plot holder
+			$("#3d-plot-holder").css("display", "none");
+			
+			//run simulation
 			window.setTimeout(function() { runSimulation(e); }, timeout);
+			
 		} else if($("#3D-option").prop("checked")){
-			$("#canvas1").css("display", "block");
-			$("#container-canvas1").css("display", "none");
+			//remove container-canvas1 if needed
+			$("#container-canvas1").remove();
+			
+			//remove old canvas
+			$("#canvas1").remove();
+			
+			//add new canvas
+			$("#3d-plot-holder").append("<canvas id='canvas1' width='600' height='600' style=\"display:block;\"></canvas>");
+			
+			//show 3d plot
+			$("#3d-plot-holder").css("display", "block");
+			
+			//hide 2d plot
 			$("#plot-holder").css("display", "none");
+			
+			//run 3d simulation
 			window.setTimeout(function() { run3dSimulation(e); }, timeout);
 		}
 		
