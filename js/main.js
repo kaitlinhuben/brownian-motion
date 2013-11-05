@@ -30,8 +30,17 @@ $(function () {
 	/* set up dimension button options */
 	$("#dimension-options-holder").buttonset();
 	
-	/* set up tooltip message as dialog */
+	/* set up tooltip messages as dialog */
 	$( "#random-dialog-message" ).dialog({
+      modal: true,
+      buttons: {
+        Ok: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+	  autoOpen: false
+    });
+	$( "#dimension-dialog-message" ).dialog({
       modal: true,
       buttons: {
         Ok: function() {
@@ -44,6 +53,9 @@ $(function () {
 	/* have dialog open when clicked */
 	$("#randomness-tooltip").click(function(){
 		$("#random-dialog-message").dialog("open");
+	});
+	$("#dimensionality-tooltip").click(function(){
+		$("#dimension-dialog-message").dialog("open");
 	});
 
 	//-------------------------------------------------------------------------

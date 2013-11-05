@@ -28,7 +28,7 @@ body {
 	/*color: #aed0ea;*/
 }
 
-#randomness-tooltip:hover {
+#randomness-tooltip:hover, #dimensionality-tooltip:hover {
 	cursor: pointer;
 	text-decoration: none;
 }
