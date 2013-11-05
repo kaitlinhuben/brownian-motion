@@ -12,11 +12,7 @@ You can also download the source code and run it locally by opening up index.htm
 <ul>
   <li>Algorithms from <a href="http://www.columbia.edu/~jb2814/">Prof. Jose Blanchet</a></li>
   <li>Statistical computing with <a href="http://stoic.com/formula/">formula.js</a></li>
-  <li>Two-dimensional plotting with <a href="http://www.flotcharts.org/">Flot</a></li>
   <li>Pre-generated random numbers and live true random number generation from <a href="http://www.random.org">RANDOM.org</a></li>
-</ul>
-
-<h1>What's up next</h1>
-<ul>
-  <li>Extending to three dimensions</li>
+  <li>Two-dimensional plotting with <a href="http://www.flotcharts.org/">Flot</a></li>
+  <li>Three-dimensional plotting with <a href="http://www.canvasxpress.org/">CanvasXpress</a></li>
 </ul>
