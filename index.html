@@ -34,13 +34,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Brownian Motion</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <!--<li><a href="#contact">Contact</a></li>-->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -51,13 +51,13 @@
 	  
 		<div class="col-md-3" id="info">
 			<h2 id="info-title">Modeling Brownian Motion</h2>
+			<p>This JavaScript application models Brownian motion in two or three dimensions.</p>
+			<p>Click "New plot" to generate a new graph with the options below.</p>
 			
-			<p>Lorem ipsum dolor sit amet</p>
-
-			<hr>
+			<hr id="control-separator">
 			
 			<div id="controls">
-				<h2 id="options-title">Options</h2>
+				<!--<h2 id="options-title">Options</h2>-->
 				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> <br><br>
 				
 				<span id="randomness-title">Randomness:</span>&nbsp;&nbsp;<a title="What's this?" id="randomness-tooltip">
@@ -121,6 +121,49 @@
 		</div><!-- /.col -->
 		
 	  </div><!-- /.row -->
+	  
+	  <div class="row filler50"><!--filler--></div>
+	  <hr />
+	  
+	  <div class="row" id="about">
+			<!-- filler to pad behind navbar -->
+	  </div><!-- /.row#about -->
+	  <div class="row" id="about-content">
+		<div class="col-md-4">
+			<h2>About the program</h2>
+			<p>
+			<ul>
+			  <li>Algorithms from <a href="http://www.columbia.edu/~jb2814/" target="_blank">Prof. Jose Blanchet</a></li>
+			  <li>Statistical computing with <a href="http://stoic.com/formula/" target="_blank">formula.js</a></li>
+			  <li>Pre-generated random numbers and live true random number generation from <a href="http://www.random.org" target="_blank">RANDOM.org</a></li>
+			  <li>Two-dimensional plotting with <a href="http://www.flotcharts.org/" target="_blank">Flot</a></li>
+			  <li>Three-dimensional plotting with <a href="http://www.canvasxpress.org/" target="_blank">CanvasXpress</a></li>
+			</ul>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Source code</h2>
+			<p>The source code and all commits are on <a href="http://www.github.com/kaitlinhuben/brownian-motion" target="_blank">GitHub</a>.</p>
+			<p>Feel free to download and run the program locally, just keep in mind you'll need internet access to generate random numbers.</p>
+			<p>You can also download previous versions or fork the repository to make some of your own changes. If you do something cool, <a href="https://github.com/kaitlinhuben/brownian-motion/pulls" target="_blank">let us know</a>!</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Found a bug?</h2>
+			<p>If something doesn't work, please email kjh2141 [at] columbia [dot] edu. Make sure to include the browser you were using and a detailed description of what happened.</p>
+			<p>If you don't want to email, you can also create a new <a href="https://github.com/kaitlinhuben/brownian-motion/issues">issue</a> on GitHub.</p>
+		</div><!-- /.col -->
+	  </div><!-- /.row#about-content -->
+	  
+	  <div class="row filler50"><!--filler--></div>
+	  <hr />
+
+	  <div class="row filler5"><!--filler--></div>
+	  <div class="row" id="footer">
+		<div class="col-md-12">
+		&copy; <a href="http://www.columbia.edu/~kjh2141" target="_blank">Kaitlin Huben</a>, 2013
+		</div>
+	  </div><!-- /.row#footer -->
+	  <div class="row filler25"><!--filler--></div
     </div><!-- /.container -->
 
     <!-- Bootstrap core JavaScript

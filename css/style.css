@@ -5,13 +5,17 @@
 body {
 	padding-top: 60px;
 }
+#control-separator {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
 #info-title {
 	/*color: #2A7CA0*/
 }
 
 #options-title {
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 }
 
 #precision-title, #randomness-title, #dimension-title{
@@ -52,4 +56,28 @@ body {
 #loading {
 	z-index: 1000; 
 	margin-top: -400px
+}
+
+.filler50, #about {
+	height: 50px;
+}
+
+#about-content div h2{
+	text-align: center;
+}
+
+#about-content div p, #about-content div ul {
+	font-size: 125%;
+}
+
+#about-content div ul li {
+	margin: 0 0 10px;
+}
+
+.filler25 {
+	height: 25px;
+}
+
+.filler5 {
+	height: 5px;
 }
