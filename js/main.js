@@ -7,7 +7,7 @@
 
 // variables for live random
 var haveRandomNumbers = false;
-var randomNumbers = ["this shouldn't be here", "neither should this"];
+var randomNumbers = ["404 Error"];
 var randIndex = 0;
 var numbersToRequest = 10000;
 var useRandomNumbers = false;

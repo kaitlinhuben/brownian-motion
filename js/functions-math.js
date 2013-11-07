@@ -7,6 +7,10 @@
 
 /* Run simulation with precision e and update plot to show results */
 function runSimulation(e) {
+	if(useRandomNumbers && !haveRandomNumbers) {
+		alert("Sorry, we couldn't connect to RANDOM.org for numbers. Error: " + randomNumbers[0]);
+		$("#loading").css("display", "none");
+	} else {
 	// simulate Brownian path twice, once to get coordinates for
 	// the x direction and once for the y direction
 	var result_x = brownian_path(e); 
@@ -79,10 +83,15 @@ function runSimulation(e) {
 		//hide loading gif once done
 		window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
 	}
+	}
 }
 
 /* Run simulation with precision e and update plot to show results */
 function run3dSimulation(e) {
+	if(useRandomNumbers && !haveRandomNumbers) {
+		alert("Sorry, we couldn't connect to RANDOM.org for numbers. Error: " + randomNumbers[0]);
+		$("#loading").css("display", "none");
+	} else {
 	// simulate Brownian path twice, once to get coordinates for
 	// the x direction and once for the y direction
 	var result_x = brownian_path(e); 
@@ -146,6 +155,7 @@ function run3dSimulation(e) {
 		
 		//hide loading gif once done
 		window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
+	}
 	}
 }
 
