@@ -143,7 +143,7 @@ $(function () {
 		$("#precision").val("");
 		$("#precision").removeAttr("readonly");
 		$('#precision-no-change-2D').hide(); 
-		$('#precision-no-change-2D').hide(); 
+		$('#precision-no-change-3D').hide(); 
 		$("#precision").show();
 		$('#liverand-label').show();
 	});
