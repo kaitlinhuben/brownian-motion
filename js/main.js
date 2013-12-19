@@ -21,14 +21,8 @@ $(function () {
 	/* empty out javascript error message */
 	$("#plot-holder").html(" ");
 	
-	/* set up refresh button */
-	//$("#refresh").button();
-	
-	/* set up randomness button options */
-	$("#random-options-holder").buttonset();
-	
-	/* set up dimension button options */
-	$("#dimension-options-holder").buttonset();
+	// set up all bootstrap buttons
+	$('.btn').button();
 	
 	/* set up tooltip messages as dialog */
 	$( "#random-dialog-message" ).dialog({
