@@ -133,5 +133,34 @@ $(function () {
 		//hide loading gif - done in function
 		//window.setTimeout(function() { $("#loading").css("display", "none"); }, 500);
 	}
-
+	
+	$('#precision').hide();
+	$('#precision-no-change-2D').show(); 
+	$('#precision-no-change-3D').hide(); 
+	$('#liverand-label').hide();
+	
+	$('#1D-option-label').click(function(){
+		$("#precision").val("");
+		$("#precision").removeAttr("readonly");
+		$('#precision-no-change-2D').hide(); 
+		$('#precision-no-change-2D').hide(); 
+		$("#precision").show();
+		$('#liverand-label').show();
+	});
+	$('#2D-option-label').click(function(){
+		$("#precision").val("0.2");
+		$("#precision").attr("readonly", "readonly");
+		$("#precision").hide();
+		$('#precision-no-change-3D').hide();
+		$('#liverand-label').hide();		
+		$('#precision-no-change-2D').show(); 
+	});
+	$('#3D-option-label').click(function(){
+		$("#precision").val("0.8");
+		$("#precision").attr("readonly", "readonly");
+		$("#precision").hide();
+		$('#precision-no-change-2D').hide(); 
+		$('#liverand-label').hide();
+		$('#precision-no-change-3D').show(); 
+	});
 });
