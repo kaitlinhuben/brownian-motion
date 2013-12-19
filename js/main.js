@@ -21,41 +21,16 @@ $(function () {
 	/* empty out javascript error message */
 	$("#plot-holder").html(" ");
 	
-	/* set up refresh button */
-	//$("#refresh").button();
+	// set up all bootstrap buttons
+	$('.btn').button();
 	
-	/* set up randomness button options */
-	$("#random-options-holder").buttonset();
-	
-	/* set up dimension button options */
-	$("#dimension-options-holder").buttonset();
-	
-	/* set up tooltip messages as dialog */
-	$( "#random-dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
-	$( "#dimension-dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
 
-	/* have dialog open when clicked */
+	/* have modal dialog open when clicked */
 	$("#randomness-tooltip").click(function(){
-		$("#random-dialog-message").dialog("open");
+		$('#randomness-tooltip-modal').modal({keyboard:true});
 	});
 	$("#dimensionality-tooltip").click(function(){
-		$("#dimension-dialog-message").dialog("open");
+		$('#dimensions-tooltip-modal').modal({keyboard:true});
 	});
 
 	//-------------------------------------------------------------------------
