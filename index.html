@@ -62,47 +62,91 @@
 				
 				<span id="randomness-title">Randomness:</span>&nbsp;&nbsp;<a title="What's this?" id="randomness-tooltip">
 						<span class="glyphicon glyphicon-question-sign"></span></a><br>
-				<div id="random-options-holder">
-					<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">
-						<label for="pseudo-option">Pseudo</label>
-					<input type="radio" name="randomness" id="prerand-option" class="random-options">
-						<label for="prerand-option">Pre</label>
-					<input type="radio" name="randomness" id="liverand-option" class="random-options">
-						<label for="liverand-option">Live</label>
+				<div id="random-options-holder" class="btn-group" data-toggle="buttons">
+					<label for="pseudo-option" class="btn btn-default active">
+						<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">
+						Pseudo
+					</label>
+					<label for="prerand-option" class="btn btn-default">
+						<input type="radio" name="randomness" id="prerand-option" class="random-options">
+						Pre
+					</label>
+					<label for="liverand-option" class="btn btn-default">
+						<input type="radio" name="randomness" id="liverand-option" class="random-options">
+						Live
+					</label>
 				</div>
-				<br>
+				<br><br>
 				<span id="dimension-title">Dimensions:</span>&nbsp;&nbsp;<a title="What's this?" id="dimensionality-tooltip"><span class="glyphicon glyphicon-question-sign"></span></a><br>
-				<div id="dimension-options-holder">
-					<input type="radio" name="dimensionality" class="random-options" id="2D-option" checked="checked">
-						<label for="2D-option">2D</label>
-					<input type="radio" name="dimensionality" class="random-options" id="3D-option">
-						<label for="3D-option">3D</label>
+				<div id="dimension-options-holder" class="btn-group" data-toggle="buttons">
+					<label for="1D-option" class="btn btn-default">
+						<input type="radio" name="dimensionality" id="1D-option" checked="checked">
+						1D
+					</label>
+					<label for="2D-option" class="btn btn-default active">
+						<input type="radio" name="dimensionality" id="2D-option" checked="checked">
+						2D
+					</label>
+					<label for="3D-option" class="btn btn-default">
+						<input type="radio" name="dimensionality" id="3D-option">
+						3D
+					</label>
 				</div>
-				<br>
-				<button type="button" id="refresh">New plot</button>
+				<br><br>
+				<button type="button" id="refresh" class="btn btn-primary">New plot</button>
 			</div>
 			
 			<!-- the tooltip message that pops up when the ? icon is clicked -->
-			<div id="random-dialog-message" title="Randomness Options">
-				<p>There are a few different options for which random numbers to use in calculations.<p>
-				<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
-				<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
-					(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
-				<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
-				to get live random numbers. <em>NOTE:</em> Could take a little while, depending on internet speed.</p>
-			</div>
+
 			<div id="dimension-dialog-message" title="Dimension Options">
-				<p><b>2D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
-				<hr>
-				<p><b>3D plotting</b>: <a href="http://www.canvasxpress.org/">CanvasXpress</a><br>
-					<ul>
-						<li>Click and drag to rotate plot</li>
-						<li>Zoom in and out with mouse wheel</li>
-						<li>Mouse over upper-right corner for helpful toolbar</li>
-					</ul>
-				</p>
+				
 			</div>
-			
+			<!-- Modal -->
+			<div class="modal fade" id="randomness-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Randomness</h4>
+				  </div>
+				  <div class="modal-body">
+					<p>There are a few different options for which random numbers to use in calculations.<p>
+					<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
+					<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
+						(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
+					<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
+					to get live random numbers. <em>NOTE:</em> Could take a little while, depending on internet speed.</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div class="modal fade" id="dimensions-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Dimensions</h4>
+				  </div>
+				  <div class="modal-body">
+					<p><b>2D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
+					<hr>
+					<p><b>3D plotting</b>: <a href="http://www.canvasxpress.org/">CanvasXpress</a><br>
+						<ul>
+							<li>Click and drag to rotate plot</li>
+							<li>Zoom in and out with mouse wheel</li>
+							<li>Mouse over upper-right corner for helpful toolbar</li>
+						</ul>
+					</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 		</div><!-- /.col -->
 		
 		<div class="col-md-9" id="content">
@@ -149,8 +193,8 @@
 		</div>
 		<div class="col-md-4">
 			<h2>Found a bug?</h2>
-			<p>If something doesn't work, please email kjh2141 [at] columbia [dot] edu. Make sure to include the browser you were using and a detailed description of what happened.</p>
-			<p>If you don't want to email, you can also create a new <a href="https://github.com/kaitlinhuben/brownian-motion/issues">issue</a> on GitHub.</p>
+			<p>If something doesn't work, please create a new <a href="https://github.com/kaitlinhuben/brownian-motion/issues">issue</a> on GitHub.</p>
+			<p>We'll get to it as soon as we can.</p>
 		</div><!-- /.col -->
 	  </div><!-- /.row#about-content -->
 	  
@@ -169,9 +213,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/angular.min.js"></script>
 	<script type="text/javascript" src="js/d3.v2.min.js"></script>
 	<script type="text/javascript" src="js/lodash.min.js"></script>
