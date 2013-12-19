@@ -24,32 +24,13 @@ $(function () {
 	// set up all bootstrap buttons
 	$('.btn').button();
 	
-	/* set up tooltip messages as dialog */
-	$( "#random-dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
-	$( "#dimension-dialog-message" ).dialog({
-      modal: true,
-      buttons: {
-        Ok: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-	  autoOpen: false
-    });
 
-	/* have dialog open when clicked */
+	/* have modal dialog open when clicked */
 	$("#randomness-tooltip").click(function(){
-		$("#random-dialog-message").dialog("open");
+		$('#randomness-tooltip-modal').modal({keyboard:true});
 	});
 	$("#dimensionality-tooltip").click(function(){
-		$("#dimension-dialog-message").dialog("open");
+		$('#dimensions-tooltip-modal').modal({keyboard:true});
 	});
 
 	//-------------------------------------------------------------------------

@@ -79,6 +79,10 @@
 				<br><br>
 				<span id="dimension-title">Dimensions:</span>&nbsp;&nbsp;<a title="What's this?" id="dimensionality-tooltip"><span class="glyphicon glyphicon-question-sign"></span></a><br>
 				<div id="dimension-options-holder" class="btn-group" data-toggle="buttons">
+					<label for="1D-option" class="btn btn-default">
+						<input type="radio" name="dimensionality" id="1D-option" checked="checked">
+						1D
+					</label>
 					<label for="2D-option" class="btn btn-default active">
 						<input type="radio" name="dimensionality" id="2D-option" checked="checked">
 						2D
@@ -93,26 +97,56 @@
 			</div>
 			
 			<!-- the tooltip message that pops up when the ? icon is clicked -->
-			<div id="random-dialog-message" title="Randomness Options">
-				<p>There are a few different options for which random numbers to use in calculations.<p>
-				<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
-				<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
-					(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
-				<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
-				to get live random numbers. <em>NOTE:</em> Could take a little while, depending on internet speed.</p>
-			</div>
+
 			<div id="dimension-dialog-message" title="Dimension Options">
-				<p><b>2D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
-				<hr>
-				<p><b>3D plotting</b>: <a href="http://www.canvasxpress.org/">CanvasXpress</a><br>
-					<ul>
-						<li>Click and drag to rotate plot</li>
-						<li>Zoom in and out with mouse wheel</li>
-						<li>Mouse over upper-right corner for helpful toolbar</li>
-					</ul>
-				</p>
+				
 			</div>
-			
+			<!-- Modal -->
+			<div class="modal fade" id="randomness-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Randomness</h4>
+				  </div>
+				  <div class="modal-body">
+					<p>There are a few different options for which random numbers to use in calculations.<p>
+					<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
+					<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
+						(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
+					<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
+					to get live random numbers. <em>NOTE:</em> Could take a little while, depending on internet speed.</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div class="modal fade" id="dimensions-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Dimensions</h4>
+				  </div>
+				  <div class="modal-body">
+					<p><b>2D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
+					<hr>
+					<p><b>3D plotting</b>: <a href="http://www.canvasxpress.org/">CanvasXpress</a><br>
+						<ul>
+							<li>Click and drag to rotate plot</li>
+							<li>Zoom in and out with mouse wheel</li>
+							<li>Mouse over upper-right corner for helpful toolbar</li>
+						</ul>
+					</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 		</div><!-- /.col -->
 		
 		<div class="col-md-9" id="content">
