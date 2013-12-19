@@ -86,6 +86,108 @@ function runSimulation(e) {
 	}
 }
 
+// run simulation in one dimension
+function run1DSimulation(e) {
+	if(useRandomNumbers && !haveRandomNumbers) {
+		alert("Sorry, we couldn't connect to RANDOM.org for numbers. Error: " + randomNumbers[0]);
+		$("#loading").css("display", "none");
+	} else {
+	// simulate Brownian path twice, once to get coordinates for
+	// the x direction and once for the y direction
+	var result_x = brownian_path(e); 
+	
+	// create new array to store pairs of points to be graphed
+	var toPlot = [];
+	var toPlotUpper = [];
+	var toPlotLower = [];
+
+	// push points to array to plot
+	for(var i = 1; i < result_x.length; i++) {
+		var time = i/result_x.length;
+		toPlot.push([time, result_x[i]]);
+		toPlotUpper.push([time, result_x[i] + parseFloat(e)]);
+		toPlotLower.push([time, result_x[i] - parseFloat(e)]);
+	}
+	console.log(toPlot);
+	
+	
+	var min_value = Number.MAX_VALUE;
+	var max_value = 0;
+	for(var i = 1; i < result_x.length; i++) {
+		if(result_x[i] - parseFloat(e) < min_value) { min_value = result_x[i] - parseFloat(e); }
+		if(result_x[i] + parseFloat(e) > max_value) { max_value = result_x[i] + parseFloat(e); }
+	}
+	console.log("Min: " + min_value);
+	console.log("Max: " + max_value);
+
+	//if min greater than 0, still want to show 0
+	if(min_value > 0) {
+		min_value = 0;
+	}
+	
+	// set options
+	var options = {
+		//make sure 0 shows on results axis
+		/*yaxis: {
+			max: max_value,
+			min: min_value
+		}*/
+	};
+	
+	/*console.log("toPlot:");
+	console.log(toPlot);
+	console.log("toPlotUpper:");
+	console.log(toPlotUpper);
+	console.log("toPlotLower:");
+	console.log(toPlotLower);*/
+	var mainSeries = {
+		color: "#2779aa",
+		data: toPlot,
+		lines: {
+			lineWidth: 1
+		},
+		shadowSize: 0
+	};
+	
+	var upperBoundSeries = {
+		color: "#ccc",
+		data: toPlotUpper,
+		lines: {
+			lineWidth: 1
+		},
+		shadowSize: 0
+	};
+	
+	var lowerBoundSeries = {
+		color: "#ccc",
+		data: toPlotLower,
+		lines: {
+			lineWidth: 1
+		},
+		shadowSize: 0
+	};
+	
+	// plot the pairs of points (using flot.js)
+	$.plot($("#plot-holder"), [ mainSeries, upperBoundSeries, lowerBoundSeries ], options);
+	
+	// update the title to show current precision and other options
+	var title = "Precision: " + e + " (";
+	if($("#pseudo-option").prop("checked")) {
+		title += "pseudorandom";
+	} else if($("#prerand-option").prop("checked")) {
+		title += "pre-generated random";
+	} else if($("#liverand-option").prop("checked")) {
+		title += "live-generated random";
+	}
+	title += ")";
+	$("#result-title").html(title);
+	
+	//hide loading gif once done
+	window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
+
+	}
+}
+
 /* Run simulation with precision e and update plot to show results */
 function run3dSimulation(e) {
 	if(useRandomNumbers && !haveRandomNumbers) {

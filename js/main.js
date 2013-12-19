@@ -91,7 +91,7 @@ $(function () {
 		//run simulation - slight time delay to let loading gif show up
 		//or possibly also to get more random numbers
 		//which simulation dependent on whether 2d or 3d
-		if($("#2D-option").prop("checked")) {
+		if($("#2D-option").prop("checked") || $("#1D-option").prop("checked")) {
 			//show 2d plot holder
 			$("#plot-holder").css("display", "block");
 			
@@ -105,8 +105,11 @@ $(function () {
 			$("#3d-plot-holder").css("display", "none");
 			
 			//run simulation
-			window.setTimeout(function() { runSimulation(e); }, timeout);
-			
+			if($("#2D-option").prop("checked")) {
+				window.setTimeout(function() { runSimulation(e); }, timeout);
+			} else if($("#1D-option").prop("checked")) {
+				window.setTimeout(function() { run1DSimulation(e); }, timeout);
+			}
 		} else if($("#3D-option").prop("checked")){
 			//remove container-canvas1 if needed
 			$("#container-canvas1").remove();
@@ -130,5 +133,34 @@ $(function () {
 		//hide loading gif - done in function
 		//window.setTimeout(function() { $("#loading").css("display", "none"); }, 500);
 	}
-
+	
+	$('#precision').hide();
+	$('#precision-no-change-2D').show(); 
+	$('#precision-no-change-3D').hide(); 
+	$('#liverand-label').hide();
+	
+	$('#1D-option-label').click(function(){
+		$("#precision").val("");
+		$("#precision").removeAttr("readonly");
+		$('#precision-no-change-2D').hide(); 
+		$('#precision-no-change-2D').hide(); 
+		$("#precision").show();
+		$('#liverand-label').show();
+	});
+	$('#2D-option-label').click(function(){
+		$("#precision").val("0.2");
+		$("#precision").attr("readonly", "readonly");
+		$("#precision").hide();
+		$('#precision-no-change-3D').hide();
+		$('#liverand-label').hide();		
+		$('#precision-no-change-2D').show(); 
+	});
+	$('#3D-option-label').click(function(){
+		$("#precision").val("0.8");
+		$("#precision").attr("readonly", "readonly");
+		$("#precision").hide();
+		$('#precision-no-change-2D').hide(); 
+		$('#liverand-label').hide();
+		$('#precision-no-change-3D').show(); 
+	});
 });
