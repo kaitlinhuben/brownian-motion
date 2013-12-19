@@ -134,10 +134,10 @@ $(function () {
 		//window.setTimeout(function() { $("#loading").css("display", "none"); }, 500);
 	}
 	
-	$('#precision').hide();
-	$('#precision-no-change-2D').show(); 
+	$('#precision').show();
+	$('#precision-no-change-2D').hide(); 
 	$('#precision-no-change-3D').hide(); 
-	$('#liverand-label').hide();
+	$('#liverand-label').show();
 	
 	$('#1D-option-label').click(function(){
 		$("#precision").val("");
