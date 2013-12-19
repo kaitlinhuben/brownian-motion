@@ -98,51 +98,59 @@ function run1DSimulation(e) {
 	
 	// create new array to store pairs of points to be graphed
 	var toPlot = [];
-	
-	// otherwise, can go ahead and plot
-	else {
-		// push points to array to plot
-		for(var i = 1; i < result_x.length; i++) {
-			var time = i/result_x.length;
-			toPlot.push(time, result_x[i]]);
-		}
-		console.log(toPlot);
-		
-		// set options
-		var options = {
-			//make sure 0 shows on results axis
-			yaxis: {
-				min: 0
-			},
-			
-			//make the line thinner
-			series: {
-				lines: {
-					lineWidth: 1
-				}
-			},
-			
-			colors: ["#2779aa"]
-		};
-		
-		// plot the pairs of points (using flot.js)
-		$.plot($("#plot-holder"), [ toPlot ], options);
-		
-		// update the title to show current precision and other options
-		var title = "Precision: " + e + " (";
-		if($("#pseudo-option").prop("checked")) {
-			title += "pseudorandom";
-		} else if($("#prerand-option").prop("checked")) {
-			title += "pre-generated random";
-		} else if($("#liverand-option").prop("checked")) {
-			title += "live-generated random";
-		}
-		title += ")";
-		$("#result-title").html(title);
-		
-		//hide loading gif once done
-		window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
+
+	// push points to array to plot
+	for(var i = 1; i < result_x.length; i++) {
+		var time = i/result_x.length;
+		toPlot.push([time, result_x[i]]);
 	}
+	console.log(toPlot);
+	
+	var min_value = Number.MAX_VALUE;
+	for(var i = 1; i < result_x.length; i++) {
+		if(result_x[i] < min_value) { min_value = result_x[i]; }
+	}
+	console.log("Min: " + min_value);
+
+	//if min greater than 0, still want to show 0
+	if(min_value > 0) {
+		min_value = 0;
+	}
+	
+	// set options
+	var options = {
+		//make sure 0 shows on results axis
+		yaxis: {
+			min: min_value
+		},
+		
+		//make the line thinner
+		series: {
+			lines: {
+				lineWidth: 1
+			}
+		},
+		
+		colors: ["#2779aa"]
+	};
+	
+	// plot the pairs of points (using flot.js)
+	$.plot($("#plot-holder"), [ toPlot ], options);
+	
+	// update the title to show current precision and other options
+	var title = "Precision: " + e + " (";
+	if($("#pseudo-option").prop("checked")) {
+		title += "pseudorandom";
+	} else if($("#prerand-option").prop("checked")) {
+		title += "pre-generated random";
+	} else if($("#liverand-option").prop("checked")) {
+		title += "live-generated random";
+	}
+	title += ")";
+	$("#result-title").html(title);
+	
+	//hide loading gif once done
+	window.setTimeout(function() { $("#loading").css("display", "none"); }, 50);
 	}
 }
 
