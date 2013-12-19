@@ -116,7 +116,7 @@ $(function () {
 		//run simulation - slight time delay to let loading gif show up
 		//or possibly also to get more random numbers
 		//which simulation dependent on whether 2d or 3d
-		if($("#2D-option").prop("checked")) {
+		if($("#2D-option").prop("checked") || $("#1D-option").prop("checked")) {
 			//show 2d plot holder
 			$("#plot-holder").css("display", "block");
 			
@@ -130,8 +130,11 @@ $(function () {
 			$("#3d-plot-holder").css("display", "none");
 			
 			//run simulation
-			window.setTimeout(function() { runSimulation(e); }, timeout);
-			
+			if($("#2D-option").prop("checked")) {
+				window.setTimeout(function() { runSimulation(e); }, timeout);
+			} else if($("#1D-option").prop("checked")) {
+				window.setTimeout(function() { run1DSimulation(e); }, timeout);
+			}
 		} else if($("#3D-option").prop("checked")){
 			//remove container-canvas1 if needed
 			$("#container-canvas1").remove();
