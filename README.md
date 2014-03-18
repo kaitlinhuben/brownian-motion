@@ -4,7 +4,7 @@ brownian-motion
 JavaScript-based app that visualizes Brownian Motion with statistically accurate algorithm. <br>
 
 <h1>How to use it</h1>
-Check it out <a href="http://www.columbia.edu/~kjh2141/brownian-motion">here</a>.<br>
+Check it out <a href="http://kaitlinhuben.github.io/projects/brownian-motion">here</a>.<br>
 You can also download the source code and run it locally by opening up index.html in your browser - just make sure to keep the file structure the same.
 (Also keep in mind you'll need internet access to run with fully random numbers.)
 
