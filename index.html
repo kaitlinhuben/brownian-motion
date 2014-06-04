@@ -1,79 +1,261 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Brownian-motion : JavaScript-based app that visualizes Brownian Motion with statistically accurate algorithm." />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An application to model random Brownian motion in a statistically accurate way.">
+    <meta name="keywords" content="Brownian motion, Brownian motion model, Columbia Brownian motion, Brownian Motion simulation, simulate Brownian motion, model Brownian motion">
+    <meta name="author" content="Kaitlin Huben">
+    <link rel="shortcut icon" href="images/favicon-crown.png">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <title>Brownian Motion</title>
 
-    <title>Brownian-motion</title>
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.css" type="text/css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+	<!--<link href="http://fonts.googleapis.com/css?family=Open+Sans" type="text/css" rel="stylesheet"> TODO-->
+	<link href="css/jquery-ui-1.10.3.custom.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap/js/html5shiv.js"></script>
+      <script src="bootstrap/js/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/kaitlinhuben/brownian-motion">View on GitHub</a>
-
-          <h1 id="project_title">Brownian-motion</h1>
-          <h2 id="project_tagline">JavaScript-based app that visualizes Brownian Motion with statistically accurate algorithm.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/kaitlinhuben/brownian-motion/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/kaitlinhuben/brownian-motion/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brownian Motion</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <!--<li><a href="#contact">Contact</a></li>-->
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </div>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+    <div class="container">
+	  <div class="row">
+	  
+		<div class="col-md-3" id="info">
+			<h2 id="info-title">Modeling Brownian Motion</h2>
+			<p>This JavaScript application models Brownian motion in two or three dimensions.</p>
+			<p>Click "New plot" to generate a new graph with the options below.</p>
+			
+			<hr id="control-separator">
+			
+			<div id="controls">
+				<!--<h2 id="options-title">Options</h2>-->
+				<span id="precision-title">Precision:</span> <input type="text" id="precision" placeholder="0.2"/> 
+				<span id="precision-no-change-2D">(Precision set at 0.2 for 2D)</span>
+				<span id="precision-no-change-3D">(Precision set at 0.8 for 3D)</span>
+				<br><br>
+				
+				<span id="randomness-title">Randomness:</span>&nbsp;&nbsp;<a title="What's this?" id="randomness-tooltip">
+						<span class="glyphicon glyphicon-question-sign"></span></a><br>
+				<div id="random-options-holder" class="btn-group" data-toggle="buttons">
+					<label for="pseudo-option" class="btn btn-default active" id="pseudorand-label">
+						<input type="radio" name="randomness" id="pseudo-option" class="random-options" checked="checked">
+						Pseudo
+					</label>
+					<label for="prerand-option" class="btn btn-default" id="prerand-label">
+						<input type="radio" name="randomness" id="prerand-option" class="random-options">
+						Pre
+					</label>
+					<label for="liverand-option" class="btn btn-default" id="liverand-label">
+						<input type="radio" name="randomness" id="liverand-option" class="random-options">
+						Live
+					</label>
+				</div>
+				<br><br>
+				<span id="dimension-title">Dimensions:</span>&nbsp;&nbsp;<a title="What's this?" id="dimensionality-tooltip"><span class="glyphicon glyphicon-question-sign"></span></a><br>
+				<div id="dimension-options-holder" class="btn-group" data-toggle="buttons">
+					<label for="1D-option" class="btn btn-default active" id="1D-option-label">
+						<input type="radio" name="dimensionality" id="1D-option" checked="checked">
+						1D
+					</label>
+					<label for="2D-option" class="btn btn-default" id="2D-option-label">
+						<input type="radio" name="dimensionality" id="2D-option">
+						2D
+					</label>
+					<label for="3D-option" class="btn btn-default" id="3D-option-label">
+						<input type="radio" name="dimensionality" id="3D-option">
+						3D
+					</label>
+				</div>
+				<br><br>
+				<button type="button" id="refresh" class="btn btn-primary">New plot</button>
+			</div>
+			
+			<!-- the tooltip message that pops up when the ? icon is clicked -->
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+			<div id="dimension-dialog-message" title="Dimension Options">
+				
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="randomness-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Randomness</h4>
+				  </div>
+				  <div class="modal-body">
+					<p>There are a few different options for which random numbers to use in calculations.<p>
+					<p><b>Pseudo:</b> Use JavaScript's native pseudorandom number generator in calculations.</p>
+					<p><b>Pre:</b> Use a pre-generated set of random numbers in calculations. 
+						(Numbers from <a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>.)</p>
+					<p><b>Live:</b> Connect with a random number generator (<a href="http://www.random.org/clients/http/" target="_blank">RANDOM.ORG</a>) 
+					to get live random numbers. <em>Please note:</em> Not enabled for 2D or 3D.</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<div class="modal fade" id="dimensions-tooltip-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Help: Dimensions</h4>
+				  </div>
+				  <div class="modal-body">
+					<p><b>1D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
+					<p>For one-dimensional plots, the algorithm is run once over the time interval (0,1). <br>
+					The result has time on the x-axis and results on the y-axis.<br>
+					The error is plotted above and below the main plot in gray.
+					<hr>
+					<p><b>2D plotting</b>: <a href="http://www.flotcharts.org/">Flot</a></p>
+					<p>For two-dimensional plots, the algorithm is run twice over the time interval (0,1). <br>
+					The result has motion in one dimension on the x-axis and motion in another dimension on the y-axis. (There is no time plotted.)
+					<hr>
+					<p><b>3D plotting</b>: <a href="http://www.canvasxpress.org/">CanvasXpress</a><br>
+						For three-dimensional plots, the algorithm is run three times over the time inverval (0,1).<br>
+						Results are plotted in each of three dimensions on x, y, and z axes. (There is no time plotted.)<br><br>
+						Some helpful tips for navigating CanvasXpress's 3D plots:
+						<ul>
+							<li>Click and drag to rotate plot</li>
+							<li>Zoom in and out with mouse wheel</li>
+							<li>Mouse over upper-right corner for helpful toolbar</li>
+						</ul>
+					</p>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+				  </div>
+				</div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+		</div><!-- /.col -->
+		
+		<div class="col-md-9" id="content">
+			<h3 id="result-title">Result</h3>
+			<div id="plot-holder" style="display:block;">
+				<!-- this text goes away if javascript is enabled -->
+				Hmm, it seems that you don't have JavaScript enabled.<br>
+				Please enable JavaScript in your browser so our application can run.<br>
+				<a href="http://www.enable-javascript.com/">Here</a> is a page that tells you what JavaScript is and how to enable it.
+			</div>
+			<div id="3d-plot-holder"><canvas id='canvas1' width='600' height='600' style="display:none;"></canvas></div>
+			<!-- this pops up if loading -->
+			<div id="loading" style="display: none;">
+				<img src="images/spinning.gif" />
+			</div>
+		</div><!-- /.col -->
+		
+	  </div><!-- /.row -->
+	  
+	  <div class="row filler50"><!--filler--></div>
+	  <hr />
+	  
+	  <div class="row" id="about">
+			<!-- filler to pad behind navbar -->
+	  </div><!-- /.row#about -->
+	  <div class="row" id="about-content">
+		<div class="col-md-4">
+			<h2>About the program</h2>
+			<p>
+			<ul>
+			  <li>Algorithms from <a href="http://www.columbia.edu/~jb2814/" target="_blank">Prof. Jose Blanchet</a></li>
+			  <li>Statistical computing with <a href="http://stoic.com/formula/" target="_blank">formula.js</a></li>
+			  <li>Pre-generated random numbers and live true random number generation from <a href="http://www.random.org" target="_blank">RANDOM.org</a></li>
+			  <li>Two-dimensional plotting with <a href="http://www.flotcharts.org/" target="_blank">Flot</a></li>
+			  <li>Three-dimensional plotting with <a href="http://www.canvasxpress.org/" target="_blank">CanvasXpress</a></li>
+			</ul>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Source code</h2>
+			<p>The source code and all commits are on <a href="http://www.github.com/kaitlinhuben/brownian-motion" target="_blank">GitHub</a>.</p>
+			<p>Feel free to download and run the program locally, just keep in mind you'll need internet access to generate random numbers.</p>
+			<p>You can also download previous versions or fork the repository to make some of your own changes. If you do something cool, <a href="https://github.com/kaitlinhuben/brownian-motion/pulls" target="_blank">let us know</a>!</p>
+		</div>
+		<div class="col-md-4">
+			<h2>Found a bug?</h2>
+			<p>If something doesn't work, please create a new <a href="https://github.com/kaitlinhuben/brownian-motion/issues">issue</a> on GitHub.</p>
+			<p>We'll get to it as soon as we can.</p>
+		</div><!-- /.col -->
+	  </div><!-- /.row#about-content -->
+	  
+	  <div class="row filler50"><!--filler--></div>
+	  <hr />
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+	  <div class="row filler5"><!--filler--></div>
+	  <div class="row" id="footer">
+		<div class="col-md-12">
+		&copy; <a href="http://kaitlinhuben.github.io" target="_blank">Kaitlin Huben</a>, 2014
+		</div>
+	  </div><!-- /.row#footer -->
+	  <div class="row filler25"><!--filler--></div
+    </div><!-- /.container -->
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type="text/javascript" src="js/d3.v2.min.js"></script>
+	<script type="text/javascript" src="js/lodash.min.js"></script>
+	<script type="text/javascript" src="js/moment.min.js"></script>
+	<script type="text/javascript" src="js/numeral.min.js"></script>
+	<script type="text/javascript" src="js/numeric.min.js"></script>
+	<script type="text/javascript" src="js/nv.d3.js"></script>
+	<script type="text/javascript" src="js/underscore.string.min.js"></script>
+	<script type="text/javascript" src="js/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="js/jstat.min.js"></script>
+	<script type="text/javascript" src="js/formula.js"></script>
+	<!--[if lt IE 9]><script type="text/javascript" src="js/flashcanvas.js"></script><![endif]-->
+    <script type="text/javascript" src="js/canvasXpress.min.js"></script>
+	<script type="text/javascript" src="js/functions-http.js"></script>
+	<script type="text/javascript" src="js/preArray.js"></script>
+	<script type="text/javascript" src="js/functions-math.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+  ga('create', 'UA-49099672-1', 'kaitlinhuben.github.io');
+  ga('send', 'pageview');
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Brownian-motion maintained by <a href="https://github.com/kaitlinhuben">kaitlinhuben</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
+</script>
   </body>
 </html>
